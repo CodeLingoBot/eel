@@ -32,14 +32,13 @@ func handleEvent(ctx Context, stats *ServiceStats, event *JDoc, raw string, debu
 		ctx.Log().Info("action", "no_matching_handlers")
 		ctx.Log().Debug("debug_action", "no_matching_handlers", "payload", event.GetOriginalObject())
 	}
-	initialCtx := ctx
 	ctx = ctx.SubContext()
 	var wg sync.WaitGroup
 	for _, handler := range handlers {
 		ctx.AddLogValue("topic", handler.Topic)
 		ctx.AddLogValue("tenantId", handler.TenantId)
 		ctx.AddLogValue("handler", handler.Name)
-		publishers, err := handler.ProcessEvent(initialCtx.SubContext(), event)
+		publishers, err := handler.ProcessEvent(ctx.SubContext(), event)
 		if err != nil {
 			ctx.Log().Error("error_type", "transformation", "cause", "bad_transformation", "handler", handler.Name, "tenant", handler.TenantId, "trace.in.data", event.GetOriginalObject(), "error", err.Error())
 			ctx.Log().Metric("bad_transformation", M_Namespace, "xrs", M_Metric, "bad_transformation", M_Unit, "Count", M_Dims, "app="+AppId+"&env="+EnvName+"&instance="+InstanceName+"&destination="+ctx.LogValue("destination").(string), M_Val, 1.0)
