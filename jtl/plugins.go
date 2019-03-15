@@ -72,7 +72,7 @@ var inboundPluginTypeMap = make(map[string]NewInboundPlugin, 0)
 
 var pluginConfigList PluginConfigList
 
-// RegisterInboundPlugin registers an (external) plugin implementation by plugin type
+// RegisterInboundPluginType registers an (external) plugin implementation by plugin type
 func RegisterInboundPluginType(newPlugin NewInboundPlugin, pluginType string) {
 	inboundPluginTypeMap[pluginType] = newPlugin
 }

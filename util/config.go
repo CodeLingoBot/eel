@@ -166,7 +166,7 @@ func GetDebugLogParams(ctx Context) *EelDebugLogParams {
 	return nil
 }
 
-// GetTenant gets tenant id from context if one was passed in as http header.
+// GetTenantId gets tenant id from context if one was passed in as http header.
 func GetTenantId(ctx Context) string {
 	if ctx.Value(EelTenantId) != nil {
 		return ctx.Value(EelTenantId).(string)
@@ -174,7 +174,7 @@ func GetTenantId(ctx Context) string {
 	return ""
 }
 
-// GetTenant gets tenant id from context if one was passed in as http header.
+// GetCustomProperties gets tenant id from context if one was passed in as http header.
 func GetCustomProperties(ctx Context) map[string]interface{} {
 	if ctx.Value(EelCustomProperties) != nil {
 		return ctx.Value(EelCustomProperties).(map[string]interface{})

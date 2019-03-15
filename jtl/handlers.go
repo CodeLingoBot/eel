@@ -125,7 +125,7 @@ func GetHandlerFactory(ctx Context) *HandlerFactory {
 	return nil
 }
 
-// GetConfig is a helper function to obtain the global config from the context.
+// GetCurrentHandlerConfig is a helper function to obtain the global config from the context.
 func GetCurrentHandlerConfig(ctx Context) *HandlerConfiguration {
 	if ctx.Value(EelHandlerConfig) != nil {
 		return ctx.Value(EelHandlerConfig).(*HandlerConfiguration)
@@ -424,7 +424,7 @@ func (hf *HandlerFactory) GetHandlersForEvent(ctx Context, event *JDoc) []*Handl
 	return hls
 }
 
-// GetHandlersByName obtains handler by name
+// GetHandlerByName obtains handler by name
 func (hf *HandlerFactory) GetHandlerByName(ctx Context, tenant string, name string) *HandlerConfiguration {
 	for _, m1 := range hf.TopicHandlerMap {
 		for _, m2 := range m1 {

@@ -124,7 +124,7 @@ func FortyTwoHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, `42`)
 }
 
-// FortyTwoHandler http handler providing 42 as a service (in JSON encoding).
+// FortyTwoJsonHandler http handler providing 42 as a service (in JSON encoding).
 func FortyTwoJsonHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := Gctx.SubContext()
 	ctx.Log().Info("action", "42aasjson")

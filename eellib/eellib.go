@@ -63,7 +63,7 @@ func EELGetSettings(ctx Context) (*EelSettings, error) {
 	return ctx.ConfigValue(EelConfig).(*EelSettings), nil
 }
 
-// EELGetSettings get current settings for read / write
+// EELUpdateSettings get current settings for read / write
 func EELUpdateSettings(ctx Context, eelSettings *EelSettings) error {
 	if Gctx == nil {
 		return errors.New("must call EELInit first")
@@ -193,7 +193,7 @@ func EELGetPublishersConcurrent(ctx Context, event interface{}, eelHandlerFactor
 	}
 }
 
-// EELTransformEvent transforms single event based on set of configuration handlers. Can yield multiple results.
+// EELTransformEventByHandlerName transforms single event based on set of configuration handlers. Can yield multiple results.
 func EELTransformEventByHandlerName(ctx Context, event interface{}, eelHandlerFactory *HandlerFactory, tenant string, name string) ([]interface{}, []error) {
 	if Gctx == nil {
 		return nil, []error{errors.New("must call EELInit first")}
@@ -276,7 +276,7 @@ func EELTransformEventConcurrent(ctx Context, event interface{}, eelHandlerFacto
 	return events, errs
 }
 
-// EELSingleTransform can work with raw JSON transformation or a transformation wrapped in a config handler.
+// EELSimpleTransform can work with raw JSON transformation or a transformation wrapped in a config handler.
 // Transformation must yield single result or no result (if filtered).
 func EELSimpleTransform(ctx Context, event string, transformation string, isTransformationByExample bool) (string, []error) {
 	if Gctx == nil {
@@ -322,7 +322,7 @@ func EELSimpleTransform(ctx Context, event string, transformation string, isTran
 	}
 }
 
-// EELSingleTransform can work with raw JSON transformation or a transformation wrapped in a config handler.
+// EELSimpleEvalExpression can work with raw JSON transformation or a transformation wrapped in a config handler.
 // Transformation must yield single result or no result (if filtered).
 func EELSimpleEvalExpression(ctx Context, event string, expr string) (string, []error) {
 	if Gctx == nil {
